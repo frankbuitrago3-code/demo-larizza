@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Larizza · Control del taller</title>
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--negro:#111317;--gris:#6b7280;--linea:#e5e7eb;--fondo:#f5f6f8;--rojo:#d92b26;--rojo-claro:#fdecec;--ok:#15803d;--ok-claro:#e7f6ec;--aviso:#b45309;--aviso-claro:#fef3e2;--azul:#1d4ed8;--azul-claro:#e8eefc;
+  --titulo:"Barlow Condensed","Arial Narrow",sans-serif;--texto:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:var(--texto);background:var(--fondo);color:var(--negro);font-size:15px}
+.demo{background:#ffd23f;text-align:center;font-size:13px;font-weight:600;padding:6px 12px}
+header{background:var(--negro);color:#fff}
+.barra{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:10px max(16px,env(safe-area-inset-left));flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--titulo);font-size:24px;font-weight:700;letter-spacing:.04em}
+.marca b{color:var(--rojo)}
+.marca small{font-family:var(--texto);font-size:12px;color:#9ca3af;font-weight:500;letter-spacing:0;display:block;margin-top:-4px}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav button{background:none;border:0;color:#cbd0d8;font:600 14px var(--texto);padding:9px 14px;border-radius:8px;cursor:pointer}
+nav button[aria-current="page"]{background:var(--rojo);color:#fff}
+main{max-width:1200px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-left)) 60px}
+h1{font-family:var(--titulo);font-size:34px;text-transform:uppercase;margin-bottom:4px}
+.sub{color:var(--gris);margin-bottom:20px}
+.btn{font:600 14px var(--texto);border-radius:8px;padding:10px 16px;border:1px solid var(--linea);background:#fff;cursor:pointer;color:var(--negro)}
+.btn.pri{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.btn.wa{background:#25d366;border-color:#25d366;color:#06301a}
+.btn:focus-visible,input:focus-visible,select:focus-visible,nav button:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px}
+.kpi span{font-size:13px;color:var(--gris)}
+.kpi strong{display:block;font-family:var(--titulo);font-size:32px;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi.rojo strong{color:var(--rojo)}
+.caja{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:18px}
+.caja h2{font-family:var(--titulo);font-size:22px;text-transform:uppercase;margin-bottom:12px}
+.tabla{width:100%;border-collapse:collapse;font-size:14px}
+.tabla th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--gris);padding:8px 10px;border-bottom:1px solid var(--linea)}
+.tabla td{padding:10px;border-bottom:1px solid var(--linea);vertical-align:middle}
+.tabla tr.clic{cursor:pointer}.tabla tr.clic:hover{background:#fafafa}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.envol{overflow-x:auto}
+.mat{font-family:ui-monospace,Consolas,monospace;font-weight:700;background:#f1f2f4;border:1px solid #d6d9de;border-radius:5px;padding:2px 7px;letter-spacing:.05em}
+.estado{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.e-presupuesto{background:#f1f2f4;color:#374151}.e-taller{background:var(--azul-claro);color:var(--azul)}.e-pintura{background:var(--aviso-claro);color:var(--aviso)}
+.e-terminado{background:var(--ok-claro);color:var(--ok)}.e-entregado{background:#ede9fe;color:#6d28d9}.e-cobrado{background:var(--negro);color:#fff}
+.filtros{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+input,select{font:inherit;padding:9px 11px;border:1px solid #d1d5db;border-radius:8px;background:#fff;min-width:0}
+label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:#374151}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.dos{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+.dos > *{min-width:0}
+@media (max-width:900px){.dos{grid-template-columns:1fr}}
+@media (max-width:480px){.barra-f{grid-template-columns:110px 1fr 36px}}
+.pieza-add{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pieza-add select{flex:1}
+.tot{display:flex;flex-direction:column;gap:8px;font-variant-numeric:tabular-nums}
+.tot div{display:flex;justify-content:space-between}
+.tot .grande{font-family:var(--titulo);font-size:30px;border-top:2px solid var(--negro);padding-top:8px}
+.x{background:none;border:0;color:var(--gris);font-size:18px;cursor:pointer}
+.barras{display:flex;flex-direction:column;gap:8px}
+.barra-f{display:grid;grid-template-columns:140px 1fr 46px;gap:10px;align-items:center;font-size:14px}
+.barra-f i{display:block;height:12px;border-radius:6px;background:var(--rojo)}
+.vacio{color:var(--gris);padding:20px;text-align:center}
+.aviso-iva{font-size:13px;color:var(--gris);margin-top:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--negro);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;z-index:50}
+</style>
+</head>
+<body>
+<div class="demo">Demostración del sistema para Larizza · Los coches, clientes y precios son de ejemplo · Los cambios se guardan solo en este navegador</div>
+<header><div class="barra">
+  <div class="marca"><img src="../img/logo-128.png" width="40" height="40" alt=""><div>LA<b>RIZZA</b><small>Control del taller</small></div></div>
+  <nav aria-label="Secciones">
+    <button data-v="panel" aria-current="page">Panel</button>
+    <button data-v="ordenes">Coches</button>
+    <button data-v="nueva">+ Nuevo coche</button>
+    <button data-v="informes">Informes e IVA</button>
+  </nav>
+</div></header>
+
+<main>
+  <!-- PANEL -->
+  <section id="v-panel">
+    <h1>Panel del mes</h1><p class="sub" id="mes-txt"></p>
+    <div class="kpis" id="kpis"></div>
+    <div class="dos">
+      <div class="caja"><h2>Coches en el taller ahora</h2><div class="envol"><table class="tabla" id="en-taller"></table></div></div>
+      <div class="caja"><h2>Piezas pintadas este mes</h2><div class="barras" id="top-piezas"></div></div>
+    </div>
+  </section>
+
+  <!-- ORDENES -->
+  <section id="v-ordenes" hidden>
+    <h1>Coches</h1><p class="sub">Todas las órdenes de trabajo. Toca una para verla o cambiarla.</p>
+    <div class="filtros">
+      <input id="buscar" type="search" placeholder="Buscar matrícula o cliente" aria-label="Buscar matrícula o cliente">
+      <select id="f-estado" aria-label="Filtrar por estado"><option value="">Todos los estados</option></select>
+    </div>
+    <div class="caja"><div class="envol"><table class="tabla" id="lista"></table></div></div>
+  </section>
+
+  <!-- NUEVA / EDITAR -->
+  <section id="v-nueva" hidden>
+    <h1 id="f-titulo">Nuevo coche</h1><p class="sub">Rellena los datos, añade las piezas y el sistema calcula el IVA.</p>
+    <div class="dos">
+      <div>
+        <div class="caja"><h2>Coche y cliente</h2>
+          <div class="rejilla">
+            <label for="o-mat">Matrícula<input id="o-mat" placeholder="1234 ABC" autocomplete="off"></label>
+            <label for="o-coche">Marca y modelo<input id="o-coche" placeholder="Seat León"></label>
+            <label for="o-color">Color<input id="o-color" placeholder="Rojo emoción"></label>
+            <label for="o-cliente">Cliente<input id="o-cliente" placeholder="Nombre y apellido"></label>
+            <label for="o-tel">Teléfono (WhatsApp)<input id="o-tel" inputmode="tel" placeholder="600 000 000"></label>
+            <label for="o-seguro">Aseguradora<select id="o-seguro"><option value="">Particular</option><option>Mapfre</option><option>Línea Directa</option><option>Mutua Madrileña</option><option>AXA</option><option>Allianz</option><option>Otra</option></select></label>
+            <label for="o-estado">Estado<select id="o-estado"></select></label>
+            <label for="o-fecha">Fecha de entrada<input id="o-fecha" type="date"></label>
+          </div>
+        </div>
+        <div class="caja"><h2>Piezas</h2>
+          <div class="pieza-add">
+            <select id="p-sel" aria-label="Pieza"></select>
+            <select id="p-trab" aria-label="Trabajo"><option>Pintar</option><option>Reparar y pintar</option><option>Sustituir y pintar</option></select>
+            <button class="btn" id="p-add" type="button">Añadir pieza</button>
+          </div>
+          <div class="envol"><table class="tabla" id="piezas"></table></div>
+        </div>
+        <div class="caja"><h2>Mano de obra y materiales</h2>
+          <div class="rejilla">
+            <label for="o-horas">Horas de mano de obra<input id="o-horas" type="number" min="0" step="0.5" value="0"></label>
+            <label for="o-tarifa">Precio por hora (€)<input id="o-tarifa" type="number" min="0" step="1" value="38"></label>
+            <label for="o-mat-extra">Materiales aparte (€)<input id="o-mat-extra" type="number" min="0" step="1" value="0"></label>
+          </div>
+        </div>
+      </div>
+      <div class="caja" style="position:sticky;top:12px"><h2>Total</h2>
+        <div class="tot" id="totales"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn pri" id="guardar" type="button">Guardar</button>
+          <button class="btn wa" id="avisar" type="button">Avisar al cliente</button>
+          <button class="btn" id="cancelar" type="button">Cancelar</button>
+        </div>
+        <p class="aviso-iva">IVA general del 21 %. Este cálculo es para el control del taller; la factura oficial se emite con el programa certificado o la gestoría.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMES -->
+  <section id="v-informes" hidden>
+    <h1>Informes e IVA</h1><p class="sub">Facturación de los trabajos cobrados, por mes y por trimestre.</p>
+    <div class="caja"><h2>Por mes</h2><div class="envol"><table class="tabla" id="por-mes"></table></div></div>
+    <div class="caja"><h2>IVA por trimestre (para la gestoría)</h2><div class="envol"><table class="tabla" id="por-trim"></table></div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="csv" type="button">Descargar Excel (CSV)</button><button class="btn" id="reset" type="button">Restaurar datos de ejemplo</button></div>
+      <p class="aviso-iva" id="csv-aviso" hidden>En esta vista de demostración la descarga puede estar bloqueada; en el sistema real se descarga el archivo.</p>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const IVA = 0.21;
+const ESTADOS = [["presupuesto","Presupuesto"],["taller","En taller"],["pintura","Chapa y pintura"],["terminado","Terminado"],["entregado","Entregado"],["cobrado","Cobrado"]];
+const PIEZAS = { "Capó":180, "Techo":220, "Portón trasero":170, "Paragolpes delantero":150, "Paragolpes trasero":150, "Aleta delantera izq.":130, "Aleta delantera der.":130,
+  "Puerta delantera izq.":160, "Puerta delantera der.":160, "Puerta trasera izq.":150, "Puerta trasera der.":150, "Aleta trasera izq.":170, "Aleta trasera der.":170,
+  "Retrovisor":60, "Estribo / talonera":110, "Llanta (unidad)":45 };
+const EXTRA = { "Pintar":1, "Reparar y pintar":1.35, "Sustituir y pintar":1.15 };
+const $ = (s) => document.querySelector(s);
+const eur = (c) => (c / 100).toLocaleString("es-ES", { style: "currency", currency: "EUR" });
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const hoy = new Date();
+const iso = (d) => d.toISOString().slice(0, 10);
+const diasAtras = (n) => { const d = new Date(hoy); d.setDate(d.getDate() - n); return iso(d); };
+
+/* ---------- datos ---------- */
+function ejemplo() {
+  const o = (id, mat, coche, color, cliente, tel, seguro, estado, dias, piezas, horas = 0, mat2 = 0) =>
+    ({ id, mat, coche, color, cliente, tel, seguro, estado, fecha: diasAtras(dias), piezas: piezas.map(([n, t, hecho]) => ({ n, t, precio: Math.round(PIEZAS[n] * EXTRA[t] * 100), hecho: !!hecho })), horas, tarifa: 38, matExtra: mat2 });
+  return [
+    o(1, "4821 KLM", "Seat León", "Rojo emoción", "Laura Gómez", "600111222", "Mapfre", "pintura", 2, [["Puerta trasera der.", "Reparar y pintar", 1], ["Aleta trasera der.", "Pintar"]], 3),
+    o(2, "7306 JHB", "Toyota Corolla", "Blanco perla", "Javier Ruiz", "600333444", "", "taller", 1, [["Paragolpes trasero", "Reparar y pintar"]], 1.5),
+    o(3, "1150 MNP", "BMW Serie 1", "Negro zafiro", "Carmen Sanz", "600555666", "Mutua Madrileña", "terminado", 6, [["Capó", "Reparar y pintar", 1], ["Aleta delantera izq.", "Sustituir y pintar", 1], ["Paragolpes delantero", "Pintar", 1]], 6, 40),
+    o(4, "9032 LFR", "Renault Clio", "Gris platino", "Pedro Alonso", "600777888", "", "presupuesto", 0, [["Puerta delantera izq.", "Pintar"], ["Retrovisor", "Pintar"]]),
+    o(5, "3348 HGT", "Volkswagen Golf", "Azul atlántico", "Marta Díaz", "600999000", "Línea Directa", "cobrado", 9, [["Paragolpes delantero", "Reparar y pintar", 1], ["Capó", "Pintar", 1]], 4),
+    o(6, "6610 KZX", "Peugeot 208", "Rojo", "Luis Herrero", "611222333", "", "cobrado", 14, [["Puerta delantera der.", "Reparar y pintar", 1]], 2),
+    o(7, "2207 JPL", "Ford Focus", "Blanco", "Ana Molina", "611444555", "AXA", "cobrado", 21, [["Techo", "Pintar", 1], ["Portón trasero", "Pintar", 1]], 3, 25),
+    o(8, "8875 GBD", "Kia Sportage", "Gris", "Sergio Ramos", "611666777", "", "cobrado", 38, [["Aleta trasera izq.", "Reparar y pintar", 1], ["Puerta trasera izq.", "Pintar", 1]], 4),
+    o(9, "5519 HXC", "Citroën C4", "Negro", "Elena Vidal", "611888999", "Mapfre", "cobrado", 52, [["Paragolpes trasero", "Pintar", 1], ["Llanta (unidad)", "Pintar", 1]], 1),
+    o(10, "4103 LBM", "Hyundai Tucson", "Blanco", "Raúl Ortega", "622111333", "Allianz", "cobrado", 75, [["Capó", "Reparar y pintar", 1], ["Paragolpes delantero", "Sustituir y pintar", 1], ["Aleta delantera der.", "Pintar", 1]], 7, 60),
+    o(11, "7742 KCD", "Mercedes Clase A", "Plata", "Nuria Castro", "622444666", "", "entregado", 4, [["Puerta delantera izq.", "Reparar y pintar", 1]], 2),
+  ];
+}
+let ordenes;
+try { ordenes = JSON.parse(localStorage.getItem("larizza_ordenes") || "null"); } catch (e) { ordenes = null; }
+if (!Array.isArray(ordenes) || !ordenes.length) ordenes = ejemplo();
+const guardarTodo = () => { try { localStorage.setItem("larizza_ordenes", JSON.stringify(ordenes)); } catch (e) {} };
+
+function calc(o) {
+  const piezas = o.piezas.reduce((a, p) => a + p.precio, 0);
+  const mano = Math.round((+o.horas || 0) * (+o.tarifa || 0) * 100);
+  const mat = Math.round((+o.matExtra || 0) * 100);
+  const base = piezas + mano + mat, iva = Math.round(base * IVA);
+  return { piezas, mano, mat, base, iva, total: base + iva };
+}
+const chip = (e) => `<span class="estado e-${e}">${ESTADOS.find((x) => x[0] === e)[1]}</span>`;
+function toast(t) { const el = $("#toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (el.hidden = true), 2200); }
+
+/* ---------- navegación ---------- */
+function ir(v) {
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== "v-" + v));
+  document.querySelectorAll("nav button").forEach((b) => { if (b.dataset.v === v) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  ({ panel: pintarPanel, ordenes: pintarLista, informes: pintarInformes })[v]?.();
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => { if (b.dataset.v === "nueva") abrir(null); ir(b.dataset.v); }));
+
+/* ---------- panel ---------- */
+function delMes(o) { const d = new Date(o.fecha); return d.getMonth() === hoy.getMonth() && d.getFullYear() === hoy.getFullYear(); }
+function pintarPanel() {
+  $("#mes-txt").textContent = hoy.toLocaleDateString("es-ES", { month: "long", year: "numeric" }).replace(/^./, (c) => c.toUpperCase());
+  const mes = ordenes.filter(delMes);
+  const cobrados = mes.filter((o) => o.estado === "cobrado");
+  const enTaller = ordenes.filter((o) => ["taller", "pintura", "terminado"].includes(o.estado));
+  const piezasMes = mes.reduce((a, o) => a + o.piezas.filter((p) => p.hecho).length, 0);
+  const pendiente = ordenes.filter((o) => ["terminado", "entregado"].includes(o.estado)).reduce((a, o) => a + calc(o).total, 0);
+  const fact = cobrados.reduce((a, o) => a + calc(o).total, 0), iva = cobrados.reduce((a, o) => a + calc(o).iva, 0);
+  $("#kpis").innerHTML = [["Coches en el taller", enTaller.length], ["Piezas pintadas este mes", piezasMes], ["Cobrado este mes (con IVA)", eur(fact)], ["IVA de este mes", eur(iva)], ["Pendiente de cobrar", eur(pendiente), "rojo"]]
+    .map(([t, v, c]) => `<div class="kpi ${c || ""}"><span>${t}</span><strong>${v}</strong></div>`).join("");
+  $("#en-taller").innerHTML = enTaller.length ? `<tr><th>Matrícula</th><th>Coche</th><th>Estado</th><th class="num">Total</th></tr>` +
+    enTaller.map((o) => `<tr class="clic" data-id="${o.id}"><td><span class="mat">${esc(o.mat)}</span></td><td>${esc(o.coche)}<br><small style="color:var(--gris)">${esc(o.cliente)}</small></td><td>${chip(o.estado)}</td><td class="num">${eur(calc(o).total)}</td></tr>`).join("")
+    : `<tr><td class="vacio">No hay coches en el taller.</td></tr>`;
+  const cuenta = {}; mes.forEach((o) => o.piezas.filter((p) => p.hecho).forEach((p) => (cuenta[p.n] = (cuenta[p.n] || 0) + 1)));
+  const top = Object.entries(cuenta).sort((a, b) => b[1] - a[1]).slice(0, 6), max = top[0]?.[1] || 1;
+  $("#top-piezas").innerHTML = top.length ? top.map(([n, c]) => `<div class="barra-f"><span>${esc(n)}</span><i style="width:${(c / max) * 100}%"></i><span class="num">${c}</span></div>`).join("") : `<p class="vacio">Aún no hay piezas pintadas este mes.</p>`;
+  document.querySelectorAll("#en-taller tr.clic").forEach((tr) => tr.addEventListener("click", () => { abrir(+tr.dataset.id); ir("nueva"); }));
+}
+
+/* ---------- lista ---------- */
+ESTADOS.forEach(([k, t]) => $("#f-estado").insertAdjacentHTML("beforeend", `<option value="${k}">${t}</option>`));
+["#buscar", "#f-estado"].forEach((s) => $(s).addEventListener("input", pintarLista));
+function pintarLista() {
+  const q = $("#buscar").value.trim().toLowerCase().replace(/\s/g, ""), e = $("#f-estado").value;
+  const filas = ordenes.filter((o) => (!e || o.estado === e) && (!q || (o.mat + o.cliente).toLowerCase().replace(/\s/g, "").includes(q)))
+    .sort((a, b) => b.fecha.localeCompare(a.fecha));
+  $("#lista").innerHTML = filas.length ? `<tr><th>Entrada</th><th>Matrícula</th><th>Coche</th><th>Cliente</th><th>Piezas</th><th>Estado</th><th class="num">Base</th><th class="num">IVA</th><th class="num">Total</th></tr>` +
+    filas.map((o) => { const c = calc(o); return `<tr class="clic" data-id="${o.id}"><td>${new Date(o.fecha).toLocaleDateString("es-ES")}</td><td><span class="mat">${esc(o.mat)}</span></td><td>${esc(o.coche)}</td><td>${esc(o.cliente)}${o.seguro ? `<br><small style="color:var(--gris)">${esc(o.seguro)}</small>` : ""}</td><td class="num">${o.piezas.length}</td><td>${chip(o.estado)}</td><td class="num">${eur(c.base)}</td><td class="num">${eur(c.iva)}</td><td class="num"><b>${eur(c.total)}</b></td></tr>`; }).join("")
+    : `<tr><td class="vacio">No hay coches con ese filtro.</td></tr>`;
+  document.querySelectorAll("#lista tr.clic").forEach((tr) => tr.addEventListener("click", () => { abrir(+tr.dataset.id); ir("nueva"); }));
+}
+
+/* ---------- formulario ---------- */
+Object.keys(PIEZAS).forEach((n) => $("#p-sel").insertAdjacentHTML("beforeend", `<option>${n}</option>`));
+ESTADOS.forEach(([k, t]) => $("#o-estado").insertAdjacentHTML("beforeend", `<option value="${k}">${t}</option>`));
+let actual = null;
+const campos = { mat: "#o-mat", coche: "#o-coche", color: "#o-color", cliente: "#o-cliente", tel: "#o-tel", seguro: "#o-seguro", estado: "#o-estado", fecha: "#o-fecha", horas: "#o-horas", tarifa: "#o-tarifa", matExtra: "#o-mat-extra" };
+function abrir(id) {
+  const o = id ? ordenes.find((x) => x.id === id) : null;
+  actual = o ? JSON.parse(JSON.stringify(o)) : { id: null, mat: "", coche: "", color: "", cliente: "", tel: "", seguro: "", estado: "presupuesto", fecha: iso(hoy), piezas: [], horas: 0, tarifa: 38, matExtra: 0 };
+  $("#f-titulo").textContent = o ? `Coche ${o.mat}` : "Nuevo coche";
+  Object.entries(campos).forEach(([k, s]) => ($(s).value = actual[k]));
+  pintarPiezas();
+}
+Object.entries(campos).forEach(([k, s]) => $(s).addEventListener("input", () => { actual[k] = $(s).value; pintarTotales(); }));
+$("#p-add").addEventListener("click", () => {
+  const n = $("#p-sel").value, t = $("#p-trab").value;
+  actual.piezas.push({ n, t, precio: Math.round(PIEZAS[n] * EXTRA[t] * 100), hecho: false }); pintarPiezas();
+});
+function pintarPiezas() {
+  $("#piezas").innerHTML = actual.piezas.length ? `<tr><th>Hecha</th><th>Pieza</th><th>Trabajo</th><th class="num">Precio (€)</th><th></th></tr>` +
+    actual.piezas.map((p, i) => `<tr><td><input type="checkbox" data-i="${i}" class="hecho" ${p.hecho ? "checked" : ""} aria-label="Pieza hecha"></td><td>${esc(p.n)}</td><td>${esc(p.t)}</td>
+      <td class="num"><input type="number" min="0" step="1" value="${p.precio / 100}" data-i="${i}" class="precio" style="width:90px;text-align:right" aria-label="Precio de ${esc(p.n)}"></td><td><button class="x" data-i="${i}" aria-label="Quitar pieza">×</button></td></tr>`).join("")
+    : `<tr><td class="vacio">Añade las piezas que se van a pintar o reparar.</td></tr>`;
+  document.querySelectorAll(".hecho").forEach((c) => c.addEventListener("change", () => { actual.piezas[c.dataset.i].hecho = c.checked; }));
+  document.querySelectorAll(".precio").forEach((c) => c.addEventListener("input", () => { actual.piezas[c.dataset.i].precio = Math.round((+c.value || 0) * 100); pintarTotales(); }));
+  document.querySelectorAll(".x").forEach((b) => b.addEventListener("click", () => { actual.piezas.splice(b.dataset.i, 1); pintarPiezas(); }));
+  pintarTotales();
+}
+function pintarTotales() {
+  const c = calc(actual);
+  $("#totales").innerHTML = `<div><span>Piezas (${actual.piezas.length})</span><span>${eur(c.piezas)}</span></div><div><span>Mano de obra</span><span>${eur(c.mano)}</span></div>
+    <div><span>Materiales</span><span>${eur(c.mat)}</span></div><div style="border-top:1px solid var(--linea);padding-top:8px"><span>Base imponible</span><b>${eur(c.base)}</b></div>
+    <div><span>IVA 21 %</span><span>${eur(c.iva)}</span></div><div class="grande"><span>Total</span><span>${eur(c.total)}</span></div>`;
+}
+$("#guardar").addEventListener("click", () => {
+  if (!actual.mat.trim()) { $("#o-mat").focus(); return toast("Pon la matrícula"); }
+  actual.mat = actual.mat.toUpperCase().trim();
+  if (actual.id) ordenes[ordenes.findIndex((o) => o.id === actual.id)] = actual;
+  else { actual.id = Math.max(0, ...ordenes.map((o) => o.id)) + 1; ordenes.push(actual); }
+  guardarTodo(); toast("Guardado"); ir("ordenes");
+});
+$("#cancelar").addEventListener("click", () => ir("ordenes"));
+$("#avisar").addEventListener("click", () => {
+  const msg = `Hola ${actual.cliente.split(" ")[0] || ""}, te escribimos de Larizza Chapa y Pintura. Tu ${actual.coche} (${actual.mat}) ya está listo. Total: ${eur(calc(actual).total)} IVA incluido. ¡Te esperamos!`;
+  const tel = actual.tel.replace(/\D/g, "");
+  if (!tel) return toast("Falta el teléfono del cliente");
+  window.open(`https://wa.me/34${tel}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+});
+
+/* ---------- informes ---------- */
+function pintarInformes() {
+  const cob = ordenes.filter((o) => o.estado === "cobrado");
+  const grupo = (clave) => { const g = {}; cob.forEach((o) => { const k = clave(new Date(o.fecha)); const c = calc(o); g[k] = g[k] || { coches: 0, piezas: 0, base: 0, iva: 0, total: 0 };
+    g[k].coches++; g[k].piezas += o.piezas.length; g[k].base += c.base; g[k].iva += c.iva; g[k].total += c.total; }); return Object.entries(g).sort((a, b) => b[0].localeCompare(a[0])); };
+  const fila = (t, r) => `<tr><td>${t}</td><td class="num">${r.coches}</td><td class="num">${r.piezas}</td><td class="num">${eur(r.base)}</td><td class="num">${eur(r.iva)}</td><td class="num"><b>${eur(r.total)}</b></td></tr>`;
+  const cab = (t) => `<tr><th>${t}</th><th class="num">Coches</th><th class="num">Piezas</th><th class="num">Base</th><th class="num">IVA 21 %</th><th class="num">Total</th></tr>`;
+  const meses = grupo((d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  $("#por-mes").innerHTML = cab("Mes") + (meses.map(([k, r]) => fila(new Date(k + "-01").toLocaleDateString("es-ES", { month: "long", year: "numeric" }), r)).join("") || `<tr><td class="vacio" colspan="6">Sin trabajos cobrados.</td></tr>`);
+  const trims = grupo((d) => `${d.getFullYear()} · T${Math.floor(d.getMonth() / 3) + 1}`);
+  $("#por-trim").innerHTML = cab("Trimestre") + (trims.map(([k, r]) => fila(k, r)).join("") || `<tr><td class="vacio" colspan="6">Sin trabajos cobrados.</td></tr>`);
+}
+$("#csv").addEventListener("click", () => {
+  const filas = [["Fecha", "Matrícula", "Coche", "Cliente", "Aseguradora", "Estado", "Piezas", "Base", "IVA", "Total"]].concat(
+    ordenes.map((o) => { const c = calc(o); return [o.fecha, o.mat, o.coche, o.cliente, o.seguro, o.estado, o.piezas.map((p) => p.n).join(" / "), (c.base / 100).toFixed(2).replace(".", ","), (c.iva / 100).toFixed(2).replace(".", ","), (c.total / 100).toFixed(2).replace(".", ",")]; }));
+  const csv = "﻿" + filas.map((f) => f.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "larizza-ordenes.csv"; a.click();
+  $("#csv-aviso").hidden = false;
+});
+$("#reset").addEventListener("click", () => { ordenes = ejemplo(); guardarTodo(); toast("Datos de ejemplo restaurados"); pintarInformes(); });
+
+ir("panel");
+</script>
+</body>
+</html>
