@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Larizza · Chapa y pintura en Collado Villalba</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<meta name="description" content="Taller de chapa y pintura en Collado Villalba (Polígono P-29, Madrid). Reparación de golpes, pintura y pulido. Presupuesto por WhatsApp con fotos del daño.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --negro:#101215; --grafito:#1b1e23; --acero:#2a2f37; --gris:#9aa3ae; --claro:#f4f5f7; --blanco:#fff;
+  --rojo:#e3342f; --rojo-osc:#b8221e; --wa:#25d366;
+  --titulo:"Barlow Condensed", "Arial Narrow", sans-serif; --texto:"Inter", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--texto);color:var(--negro);background:var(--blanco);line-height:1.55}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+.cont{max-width:1140px;margin:0 auto;padding:0 max(18px,env(safe-area-inset-left))}
+h1,h2,h3{font-family:var(--titulo);text-transform:uppercase;letter-spacing:.01em;line-height:1.02;text-wrap:balance}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;border-radius:8px;padding:14px 22px;border:0;cursor:pointer;font-size:16px;font-family:var(--texto)}
+.btn-wa{background:var(--wa);color:#06301a}
+.btn-wa:hover{filter:brightness(1.05)}
+.btn-borde{border:2px solid rgba(255,255,255,.4);color:#fff}
+.btn-borde:hover{border-color:#fff}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.demo{background:#ffd23f;color:#1a1300;text-align:center;font-size:13px;font-weight:600;padding:7px 12px}
+
+/* cabecera */
+header{position:sticky;top:0;z-index:20;background:rgba(16,18,21,.94);backdrop-filter:blur(8px);color:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--titulo);font-size:26px;font-weight:800;letter-spacing:.04em;text-decoration:none}
+.logo b{color:var(--rojo)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:15px}
+.nav ul a{text-decoration:none;color:#d6dae0}
+.nav ul a:hover{color:#fff}
+.nav .btn{padding:10px 16px;font-size:14px}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* portada */
+.hero{position:relative;background:radial-gradient(1200px 500px at 85% 20%,rgba(227,52,47,.25),transparent 60%),linear-gradient(180deg,#14171b,#0d0f12);color:#fff;overflow:hidden}
+.hero .cont{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:72px 84px}
+.hero h1{font-size:clamp(46px,7vw,84px);font-weight:800}
+.hero h1 span{color:var(--rojo)}
+.hero p{color:#c7cdd5;font-size:18px;max-width:52ch;margin:18px 0 28px}
+.hero .acciones{display:flex;flex-wrap:wrap;gap:12px}
+.datos{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.datos div{font-family:var(--titulo);font-size:34px;font-weight:700}
+.datos small{display:block;font-family:var(--texto);font-size:13px;color:var(--gris);font-weight:500;text-transform:none}
+.logo-hero{justify-self:center;width:min(440px,100%);height:auto;filter:drop-shadow(0 0 60px rgba(227,52,47,.35)) drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+@media (max-width:860px){.hero .cont{grid-template-columns:1fr;padding-block:48px 56px}}
+
+section{padding-block:80px}
+.etq{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rojo);margin-bottom:10px}
+.sec-tit{font-size:clamp(36px,5vw,54px);margin-bottom:14px}
+.sec-sub{color:#5b636e;max-width:60ch;margin-bottom:40px}
+
+/* servicios */
+.servicios{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.serv{border:1px solid #e3e6ea;border-radius:12px;padding:24px;background:#fff;transition:border-color .2s,transform .2s}
+.serv:hover{border-color:var(--rojo);transform:translateY(-2px)}
+.serv .ico{width:46px;height:46px;border-radius:10px;background:#fdecec;display:grid;place-items:center;margin-bottom:14px}
+.serv h3{font-size:24px;margin-bottom:6px}
+.serv p{color:#5b636e;font-size:15px}
+
+/* antes y despues */
+.oscuro{background:var(--grafito);color:#fff}
+.oscuro .sec-sub{color:#aab2bd}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.comp{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#0d0f12;user-select:none;touch-action:none}
+.comp .capa{position:absolute;inset:0}
+.comp .antes{clip-path:inset(0 50% 0 0)}
+.comp .linea{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);pointer-events:none}
+.comp .linea::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;font-size:18px;font-weight:700}
+.comp .tag{position:absolute;top:12px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6)}
+.comp .t-antes{left:12px}.comp .t-desp{right:12px}
+.comp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}
+.pie{margin-top:10px;font-size:14px;color:#aab2bd}
+
+/* presupuesto */
+.presu{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.presu{grid-template-columns:1fr}}
+.pasos{display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.paso{display:flex;gap:14px}
+.paso b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--rojo);color:#fff;display:grid;place-items:center;font-family:var(--titulo);font-size:20px}
+form{background:var(--claro);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px}
+label{font-size:14px;font-weight:600;display:flex;flex-direction:column;gap:6px}
+input,select,textarea{font:inherit;font-weight:400;padding:12px;border:1px solid #d3d8de;border-radius:8px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.fila2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.fila2{grid-template-columns:1fr}}
+.nota{font-size:13px;color:#5b636e}
+.vista{display:none;background:#e7f9ee;border:1px solid #9be2b7;border-radius:10px;padding:14px;font-size:14px;white-space:pre-wrap}
+
+/* opiniones */
+.opiniones{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.op{border:1px solid #e3e6ea;border-radius:12px;padding:22px}
+.estrellas{color:#f5a623;letter-spacing:2px;margin-bottom:8px}
+.op p{font-size:15px;margin-bottom:12px}
+.op span{font-size:13px;color:#5b636e;font-weight:600}
+.nota-google{display:flex;align-items:center;gap:10px;margin-bottom:28px;font-weight:600}
+.nota-google big{font-family:var(--titulo);font-size:42px}
+
+/* contacto */
+.contacto{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+@media (max-width:860px){.contacto{grid-template-columns:1fr}}
+.mapa{border-radius:14px;min-height:280px;background:
+  linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px) 0 0/40px 40px, #23272e;position:relative;overflow:hidden}
+.mapa::before{content:"";position:absolute;left:-10%;right:-10%;top:55%;height:26px;background:#3a4049;transform:rotate(-8deg)}
+.mapa::after{content:"";position:absolute;top:-10%;bottom:-10%;left:38%;width:22px;background:#3a4049;transform:rotate(12deg)}
+.pin{position:absolute;left:50%;top:44%;transform:translate(-50%,-100%);z-index:2;text-align:center;color:#fff;font-weight:700;font-size:14px}
+.pin i{display:block;width:28px;height:28px;border-radius:50% 50% 50% 0;background:var(--rojo);transform:rotate(-45deg);margin:0 auto 6px}
+.info{display:flex;flex-direction:column;gap:16px}
+.info div{display:flex;gap:12px}
+.info strong{display:block}
+footer{background:var(--negro);color:#8c949f;font-size:14px;padding-block:28px}
+footer .cont{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.flotante{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:30;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 25px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.serv{transition:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoBodyShop","name":"Larizza Chapa y Pintura","image":"img/logo-cuadrado.jpg","address":{"@type":"PostalAddress","streetAddress":"Polígono Industrial P-29","addressLocality":"Collado Villalba","addressRegion":"Madrid","addressCountry":"ES"},"areaServed":["Collado Villalba","Galapagar","Alpedrete","Moralzarzal","Guadarrama","Torrelodones"]}</script>
+</head>
+<body>
+<div class="demo">Propuesta de web para Larizza Chapa y Pintura · Demostración hecha por smartbyte</div>
+
+<header>
+  <nav class="cont nav" aria-label="Principal">
+    <a class="logo" href="#inicio"><img src="img/logo-128.png" width="40" height="40" alt="">LA<b>RIZZA</b></a>
+    <ul><li><a href="#servicios">Servicios</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="#presupuesto">Presupuesto</a></li><li><a href="#opiniones">Opiniones</a></li><li><a href="#contacto">Contacto</a></li></ul>
+    <a class="btn btn-wa" href="#presupuesto">Pedir presupuesto</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="cont">
+      <div>
+        <h1>Tu coche como <span>recién salido</span> de fábrica</h1>
+        <p>Taller de chapa y pintura en Collado Villalba. Envíanos fotos del daño por WhatsApp y te damos un presupuesto en menos de 2 horas.</p>
+        <div class="acciones">
+          <a class="btn btn-wa" href="#presupuesto"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#06301a" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 .9c.3.1.4.2.5.3.1.2.1.7-.1 1.4z"/></svg>Presupuesto por WhatsApp</a>
+          <a class="btn btn-borde" href="#trabajos">Ver trabajos</a>
+        </div>
+        <div class="datos">
+          <div>2 horas<small>para tu presupuesto</small></div>
+          <div>Todas<small>las marcas y modelos</small></div>
+          <div>Seguros<small>gestionamos tu parte</small></div>
+        </div>
+      </div>
+      <img class="logo-hero" src="img/logo-redondo.png" width="460" height="460" alt="Logo de Larizza Chapa y Pintura">
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="cont">
+      <div class="etq">Servicios</div>
+      <h2 class="sec-tit">Todo lo que tu coche necesita</h2>
+      <p class="sec-sub">Trabajamos con todas las marcas y con las principales aseguradoras. Te damos el coche de vuelta limpio y revisado.</p>
+      <div class="servicios">
+        <article class="serv"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3342f" stroke-width="2"><path d="M4 16l3-6h10l3 6v3H4z"/><path d="M8 12l2-2m3 2l2-2"/></svg></div><h3>Chapa y golpes</h3><p>Reparamos abolladuras, rayones profundos y daños de accidente, sin sustituir piezas cuando no hace falta.</p></article>
+        <article class="serv"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3342f" stroke-width="2"><path d="M4 4h12v6H4zM10 10v4M8 14h4v6H8z"/></svg></div><h3>Pintura al horno</h3><p>Igualamos el color exacto de tu coche con mezcla por ordenador y cabina de pintura profesional.</p></article>
+        <article class="serv"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3342f" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Pulido y faros</h3><p>Devolvemos el brillo a la pintura y la transparencia a los faros amarillentos.</p></article>
+        <article class="serv"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3342f" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Aseguradoras</h3><p>Gestionamos el parte con tu seguro: tú solo traes el coche y nosotros hablamos con ellos.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajos" class="oscuro">
+    <div class="cont">
+      <div class="etq">Antes y después</div>
+      <h2 class="sec-tit">Nuestros trabajos hablan por nosotros</h2>
+      <p class="sec-sub">Desliza sobre cada foto para ver el antes y el después. En la web de tu taller irán tus propias fotos.</p>
+      <div class="galeria" id="galeria"></div>
+    </div>
+  </section>
+
+  <section id="presupuesto">
+    <div class="cont presu">
+      <div>
+        <div class="etq">Presupuesto gratis</div>
+        <h2 class="sec-tit">Presupuesto en 2 horas, sin moverte de casa</h2>
+        <div class="pasos">
+          <div class="paso"><b>1</b><p><strong>Cuéntanos qué le pasó al coche.</strong><br>Marca, modelo y dónde está el daño.</p></div>
+          <div class="paso"><b>2</b><p><strong>Envía 2 o 3 fotos por WhatsApp.</strong><br>De lejos y de cerca del golpe.</p></div>
+          <div class="paso"><b>3</b><p><strong>Te respondemos con el precio.</strong><br>Y si te encaja, te damos cita.</p></div>
+        </div>
+      </div>
+      <form id="form" novalidate>
+        <div class="fila2">
+          <label for="nombre">Tu nombre<input id="nombre" name="nombre" required autocomplete="name" placeholder="Ej.: Laura"></label>
+          <label for="coche">Marca y modelo<input id="coche" name="coche" required placeholder="Ej.: Seat León 2019"></label>
+        </div>
+        <label for="servicio">¿Qué necesitas?
+          <select id="servicio" name="servicio"><option>Reparar un golpe</option><option>Pintura</option><option>Rayones</option><option>Pulido y faros</option><option>Parte del seguro</option><option>Otro</option></select>
+        </label>
+        <label for="detalle">Describe el daño<textarea id="detalle" name="detalle" placeholder="Ej.: golpe en la puerta trasera derecha, con la pintura levantada."></textarea></label>
+        <button class="btn btn-wa" type="submit">Enviar por WhatsApp y adjuntar fotos</button>
+        <p class="nota">Al pulsar se abre WhatsApp con tu mensaje ya escrito; solo tienes que añadir las fotos.</p>
+        <div class="vista" id="vista" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="opiniones" style="background:var(--claro)">
+    <div class="cont">
+      <div class="etq">Opiniones</div>
+      <h2 class="sec-tit">Lo que dicen nuestros clientes</h2>
+      <p class="nota" style="margin-bottom:24px">Aquí irán las opiniones reales de tu ficha de Google. Estas son de ejemplo.</p>
+      <div class="opiniones">
+        <article class="op"><div class="estrellas">★★★★★</div><p>“Me dejaron la puerta como nueva y el color es idéntico. Me mandaron el presupuesto por WhatsApp en una hora.”</p><span>Laura M. · cliente de ejemplo</span></article>
+        <article class="op"><div class="estrellas">★★★★★</div><p>“Se encargaron de todo con el seguro. Muy serios y cumplieron el plazo que me dijeron.”</p><span>Javier R. · cliente de ejemplo</span></article>
+        <article class="op"><div class="estrellas">★★★★★</div><p>“Pulieron los faros y parece otro coche. Precio justo y trato de diez.”</p><span>Carmen S. · cliente de ejemplo</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="cont contacto">
+      <div class="mapa" role="img" aria-label="Mapa de ubicación de ejemplo"><div class="pin"><i></i>Larizza</div></div>
+      <div class="info">
+        <div class="etq">Dónde estamos</div>
+        <h2 class="sec-tit" style="margin-bottom:6px">Ven a vernos</h2>
+        <p class="nota" style="font-size:15px">Atendemos a clientes de Collado Villalba, Galapagar, Alpedrete, Moralzarzal, Guadarrama, Torrelodones y toda la sierra de Madrid.</p>
+        <div><span aria-hidden="true">📍</span><p><strong>Dirección</strong>Polígono Industrial P-29, Collado Villalba (Madrid)</p></div>
+        <div><span aria-hidden="true">🕘</span><p><strong>Horario</strong>Aquí irá el horario del taller</p></div>
+        <div><span aria-hidden="true">📞</span><p><strong>Teléfono y WhatsApp</strong>Aquí irá el número del taller</p></div>
+        <a class="btn btn-wa" style="align-self:flex-start;margin-top:6px" href="https://www.google.com/maps/search/?api=1&amp;query=Pol%C3%ADgono+P-29+Collado+Villalba" target="_blank" rel="noopener">Cómo llegar con Google Maps</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="cont"><span>© <span id="anio"></span> Larizza · Chapa y pintura</span><span>Web hecha por smartbyte</span></div></footer>
+<a class="flotante" href="#presupuesto" aria-label="Pedir presupuesto por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 .9c.3.1.4.2.5.3.1.2.1.7-.1 1.4z"/></svg></a>
+
+<script>
+// Número del taller con prefijo de país, solo dígitos. Vacío en la demo: se muestra el mensaje en pantalla.
+const WHATSAPP = "";
+
+// ---- Galería antes/después: ilustraciones del mismo coche dañado y reparado ----
+const trabajos = [
+  { color: "#2f6fd6", tit: "Puerta trasera abollada · Seat León", dano: "puerta" },
+  { color: "#e8e8ea", tit: "Paragolpes rayado · Toyota Corolla", dano: "paragolpes" },
+  { color: "#1f1f22", tit: "Aleta y capó tras un golpe · BMW Serie 1", dano: "capo" },
+];
+function coche(color, danado, dano) {
+  const raya = danado ? (dano === "paragolpes"
+      ? '<path d="M372 176l70 14M380 186l60 10M368 168l40 6" stroke="#7a5a3a" stroke-width="3"/>'
+      : dano === "capo" ? '<path d="M330 120q30 30 70 18" stroke="#000" stroke-opacity=".45" stroke-width="10" fill="none"/><path d="M340 112l20 22M370 116l10 18" stroke="#c9b28f" stroke-width="3"/>'
+      : '<ellipse cx="200" cy="150" rx="46" ry="22" fill="#000" fill-opacity=".38"/><path d="M168 140l60 18M176 156l40-14" stroke="#d8c7a8" stroke-width="3"/>') : "";
+  const brillo = danado ? "" : '<path d="M120 128c90-14 200-14 300 0" stroke="#fff" stroke-opacity=".45" stroke-width="4" fill="none"/>';
+  const fondo = danado ? "#3a3d43" : "#2b3d52";
+  return `<svg viewBox="0 0 520 390" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="520" height="390" fill="${fondo}"/><rect y="260" width="520" height="130" fill="${danado ? "#2a2c30" : "#1f2c3b"}"/>
+    <g transform="translate(0,50)"><path d="M40 190c0-22 12-38 40-44l70-12 60-42c14-10 30-14 48-14h92c22 0 40 8 56 22l44 38 46 10c18 4 28 18 28 36v14c0 10-6 16-16 16H56c-10 0-16-6-16-16z" fill="${color}" ${danado ? 'filter="saturate(.55) brightness(.8)"' : ""}/>
+    <path d="M222 92c10-7 22-10 35-10h40v52H168z" fill="#7d8b99"/><path d="M309 82h31c18 0 33 6 46 18l36 34H309z" fill="#7d8b99"/>${raya}${brillo}
+    <circle cx="140" cy="218" r="34" fill="#141619"/><circle cx="140" cy="218" r="18" fill="#9aa3ae"/><circle cx="398" cy="218" r="34" fill="#141619"/><circle cx="398" cy="218" r="18" fill="#9aa3ae"/></g></svg>`;
+}
+const gal = document.getElementById("galeria");
+trabajos.forEach((t, i) => {
+  const fig = document.createElement("figure");
+  fig.innerHTML = `<div class="comp"><div class="capa">${coche(t.color, false, t.dano)}</div><div class="capa antes">${coche(t.color, true, t.dano)}</div>
+    <div class="linea"></div><span class="tag t-antes">Antes</span><span class="tag t-desp">Después</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después: ${t.tit}"></div><figcaption class="pie">${t.tit}</figcaption>`;
+  const r = fig.querySelector("input"), antes = fig.querySelector(".antes"), linea = fig.querySelector(".linea");
+  r.addEventListener("input", () => { antes.style.clipPath = `inset(0 ${100 - r.value}% 0 0)`; linea.style.left = r.value + "%"; });
+  gal.appendChild(fig);
+});
+
+// ---- Presupuesto: arma el mensaje y abre WhatsApp ----
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = e.target, nombre = f.nombre.value.trim(), cocheTxt = f.coche.value.trim();
+  if (!nombre || !cocheTxt) { (nombre ? f.coche : f.nombre).focus(); return; }
+  const msg = `Hola, soy ${nombre}. Quiero un presupuesto.\nCoche: ${cocheTxt}\nServicio: ${f.servicio.value}\nDaño: ${f.detalle.value.trim() || "(te mando fotos)"}\nTe adjunto fotos.`;
+  if (WHATSAPP) { window.location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`; return; }
+  const v = document.getElementById("vista"); v.style.display = "block";
+  v.textContent = "En la web real se abriría WhatsApp con este mensaje:\n\n" + msg;
+});
+document.getElementById("anio").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
